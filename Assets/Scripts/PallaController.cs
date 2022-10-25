@@ -34,6 +34,8 @@ public class PallaController : MonoBehaviour
                 started = true;
 
                 SpawnerPiattaforma.current.CominciaSpawn();
+
+                GameManager.current.StartGame();
             }
         }
 
@@ -45,6 +47,7 @@ public class PallaController : MonoBehaviour
             Camera.main.GetComponent<CameraController>().gameOver = true; //Richiamo variabile gameOver da CameraController
 
             SpawnerPiattaforma.current.gameOver = true;
+            GameManager.current.GameOver();
         }
 
         if(Input.GetMouseButtonDown(0) && !gameOver)
@@ -66,12 +69,31 @@ public class PallaController : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider col)
-    {
-        if(col.gameObject.tag == "Diamond")
+    {        
+        if(col.gameObject.tag == "PurpleDiamond")
         {
+            ScoreManager.current.score += 5;
             GameObject part = Instantiate(particle, col.gameObject.transform.position, Quaternion.identity) as GameObject;
             Destroy(col.gameObject);
             Destroy(part, 1f);
+            print("viola");
         }
+        else if(col.gameObject.tag == "SilverDiamond")
+        {
+            ScoreManager.current.score += 20;
+            GameObject part = Instantiate(particle, col.gameObject.transform.position, Quaternion.identity) as GameObject;
+            Destroy(col.gameObject);
+            Destroy(part, 1f);
+            print("silver");
+        }
+        else if(col.gameObject.tag == "GoldDiamond")
+        {
+            ScoreManager.current.score += 50;
+            GameObject part = Instantiate(particle, col.gameObject.transform.position, Quaternion.identity) as GameObject;
+            Destroy(col.gameObject);
+            Destroy(part, 1f);
+            print("oro");
+        }
+        
     }
 }

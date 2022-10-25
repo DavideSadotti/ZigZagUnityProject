@@ -5,7 +5,9 @@ using UnityEngine;
 public class SpawnerPiattaforma : MonoBehaviour
 {
     public GameObject piattaforma;
-    public GameObject diamond;
+    public GameObject purpleDiamond;
+    public GameObject silverDiamond;
+    public GameObject goldDiamond;
     Vector3 ultimaPos;
     Vector3 pos;
     float size;
@@ -83,9 +85,25 @@ public class SpawnerPiattaforma : MonoBehaviour
     {
         int rand = Random.Range(0, 10);
 
-        if(rand == 0)
+        if(rand < 1)
         {
-            Instantiate(diamond, new Vector3(pos.x, 1.2f, pos.z), diamond.transform.rotation);
+            int randDiamond = Random.Range(0, 35);
+
+            if(randDiamond < 10)
+            {
+                print("purple1");
+                purpleDiamond = Instantiate(purpleDiamond, new Vector3(pos.x, 1.2f, pos.z), purpleDiamond.transform.rotation);
+            }
+            else if(randDiamond >= 10 && randDiamond < 20)
+            {
+                print("silver1");
+                silverDiamond = Instantiate(silverDiamond, new Vector3(pos.x, 1.2f, pos.z), silverDiamond.transform.rotation);
+            }
+            else if(randDiamond >= 20 && randDiamond < 35)
+            {
+                print("gold1");
+                goldDiamond = Instantiate(goldDiamond, new Vector3(pos.x, 1.2f, pos.z), goldDiamond.transform.rotation);
+            }
         }
     }
 }
